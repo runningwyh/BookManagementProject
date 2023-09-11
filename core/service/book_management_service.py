@@ -11,6 +11,7 @@ class BookManagement(object):
     @staticmethod
     async def add_book(body_data):
         book_name = body_data.get("book_name")
+        await Book.save(body_data)
 
         return body_data
 
