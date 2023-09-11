@@ -3,8 +3,8 @@
 
 from fastapi import APIRouter, Body
 
-from core.service.user_management_service import BookManagement
-from core.schema.user_management_schema import BookRequest
+from core.service.book_management_service import BookManagement
+from core.schema.book_management_schema import BookRequest
 
 router = APIRouter()
 

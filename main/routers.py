@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from core.view.user_management_view import router as book
+from core.view.book_management_view import router as book
 
 """
 接口路由view层注册

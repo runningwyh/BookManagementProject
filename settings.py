@@ -52,7 +52,7 @@ async def connect_db():
         "apps": {
             "zt_auto_test": {
                 "models": [
-                    "core.model.user_management_model",
+                    "core.model.book_management_model",
                     # "core.user.model",
                 ],
                 "default_connection": "default"
