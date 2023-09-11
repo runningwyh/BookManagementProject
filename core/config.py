@@ -1,0 +1,7 @@
+redishost = '42.192.39.253'
+redisport = '6379'
+redisdb = 123456
+
+SECRET_KEY = "d6f72340d4afe840c036ba5d593f7fd36c3c811602f77abebdef8127b74ddce2"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
