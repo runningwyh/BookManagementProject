@@ -11,6 +11,3 @@ def get_mouse_position():
     import pyautogui
     print(pyautogui.position())
 
-
-
-# @@@1111113333
