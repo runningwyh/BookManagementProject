@@ -36,12 +36,11 @@ async def connect_db():
             "default": {
                 "engine": "tortoise.backends.mysql",
                 "credentials": {
-                    'host': "127.0.0.1",
-                    # 'host': "42.192.39.253",
+                    'host': "42.192.39.253",
                     'port': "3306",
                     'user': "root",
                     'password': "123456",
-                    'database': "test_tmp",
+                    'database': "book",
                     'minsize': 1,
                     'maxsize': 5,
                     'charset': 'utf8mb4'

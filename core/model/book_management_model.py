@@ -11,7 +11,7 @@ class Book(Model):
     book_name = fields.CharField(max_length=64, null=False, description="书名")
     author = fields.CharField(max_length=32, description="作者")
     publish = fields.CharField(max_length=32, description="出版社")
-    publish_time = fields.DatetimeField(description="出版时间")
+    publish_time = fields.CharField(max_length=32, description="出版时间")
     language = fields.CharField(max_length=16, description="语言")
     price = fields.FloatField(description="价格")
     book_class_id = fields.IntField(description="图书分类")
