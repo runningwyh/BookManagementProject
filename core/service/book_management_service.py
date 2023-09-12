@@ -8,7 +8,6 @@ from settings import logs
 
 
 class BookManagement(object):
-
     @staticmethod
     async def add_book(body_data):
         book_name = body_data.get("bookName")
