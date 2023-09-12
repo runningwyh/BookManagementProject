@@ -8,8 +8,10 @@ from settings import logs
 
 
 class BookManagement(object):
-    @staticmethod
-    async def add_book(body_data):
+    def __init__(self):
+        pass
+
+    async def add_book(self, body_data):
         book_name = body_data.get("bookName")
         book_data = {
             "book_name": body_data.get("bookName"),
@@ -24,3 +26,6 @@ class BookManagement(object):
         }
         await Book.create(**book_data)
         return book_data
+
+    async def select_book(self, request):
+        pass
