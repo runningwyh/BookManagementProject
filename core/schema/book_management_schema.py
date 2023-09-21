@@ -17,9 +17,12 @@ class BookRequest(BaseModel):
     book_class_id: str
 
 
-
-class UserLogin(BaseModel):
-    """ 用户登录数据格式化 """
-    name: str
-    password: str
+class UpdateBookRequest(BaseModel):
+    bookName: str
+    author: str
+    publish: str
+    price: float
+    stock: int
+    introduction: str
+    publish_time: str
 

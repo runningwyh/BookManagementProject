@@ -30,7 +30,7 @@ class Main(object):
     def create_app(cls):
         app = FastAPI(
             debug=False,
-            title='test',
+            title='图书管理系统',
             description='test1',
             version='v1.0.0',
             docs_url='/docs',

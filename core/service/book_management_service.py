@@ -3,9 +3,6 @@
 from core.model.book_management_model import Book
 from core.response_code import TestResponseCode
 
-from core.te import *
-from settings import logs
-
 
 class BookManagement(object):
     def __init__(self):
@@ -27,5 +24,19 @@ class BookManagement(object):
         await Book.create(**book_data)
         return book_data
 
-    async def select_book(self, request):
-        pass
+    async def get_book_list(self, request, page, size, book_name, author, publish):
+        dic = {"deleted": 0}
+        book_name and dic.update(book_name=book_name)
+        author and dic.update(author=author)
+        publish and dic.update(publish=publish)
+        book_result = await Book.filter(**dic)
+        book_result = book_result if book_result else "查询结果为空"
+        return book_result
+
+    async def delete_book(self, book_id):
+        book = await Book.filter(id = book_id).first()
+        if book:
+            await book.delete()
+
+    async def update_book(self, book_obj):
+        return book_obj

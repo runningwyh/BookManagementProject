@@ -8,6 +8,6 @@ from core.view.book_management_view import router as book
 
 RESPONSES = {404: {"description": "Not found"}}
 include = [
-    {"router": book, "prefix": f"/book", "tags": ['user_center'], "responses": RESPONSES},
+    {"router": book, "prefix": f"/book", "tags": ['BookManagement'], "responses": RESPONSES},
     # {"router": project, "prefix": f"/project", "tags": ['interface_center'], "responses": RESPONSES}
 ]
