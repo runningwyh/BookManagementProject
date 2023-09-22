@@ -18,6 +18,7 @@ class BookRequest(BaseModel):
 
 
 class UpdateBookRequest(BaseModel):
+    id: int
     bookName: str
     author: str
     publish: str

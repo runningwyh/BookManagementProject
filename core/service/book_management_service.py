@@ -39,4 +39,18 @@ class BookManagement(object):
             await book.delete()
 
     async def update_book(self, book_obj):
-        return book_obj
+        book_id = book_obj.get("id")
+        update_data = {
+            "book_name": book_obj.get("bookName"),
+            "author": book_obj.get("author"),
+            "publish": book_obj.get("publish"),
+            "price": book_obj.get("price"),
+            "stock": book_obj.get("stock"),
+            "introduction": book_obj.get("introduction"),
+            "publish_time": book_obj.get("publish_time")
+        }
+        try:
+            await Book.filter(id=book_id).update(**update_data)
+            return "书籍修改成功过"
+        except:
+            return "书籍修改失败"
