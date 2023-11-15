@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from tortoise import Model, fields
-from tortoise.fields.relational import ForeignKeyField
 
 
 class Book(Model):
@@ -13,7 +12,7 @@ class Book(Model):
     publish = fields.CharField(max_length=32, description="出版社")
     publish_time = fields.CharField(max_length=32, description="出版时间")
     language = fields.CharField(max_length=16, description="语言")
-    price = fields.FloatField(description="价格")
+    price = fields.DecimalField(max_digits=8, decimal_places=2, description="价格")
     book_class_id = fields.IntField(description="图书分类")
     stock = fields.IntField(description="库存")
     introduction = fields.TextField(description="简介")
@@ -26,3 +25,4 @@ class Book(Model):
         table_description = "图书表"
         unique_together = []
         ordering = []
+

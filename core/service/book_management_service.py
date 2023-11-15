@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 from core.model.book_management_model import Book
-from core.response_code import TestResponseCode
 
 
 class BookManagement(object):
@@ -21,8 +20,11 @@ class BookManagement(object):
             "publish_time": body_data.get("publish_time"),
             "book_class_id": body_data.get("book_class_id")
         }
-        await Book.create(**book_data)
-        return book_data
+        try:
+            await Book.create(**book_data)
+            return "书籍添加成功！"
+        except Exception as e:
+            return e
 
     async def get_book_list(self, request, page, size, book_name, author, publish):
         dic = {"deleted": 0}
