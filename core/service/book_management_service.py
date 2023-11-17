@@ -28,11 +28,12 @@ class BookManagement(object):
 
     async def get_book_list(self, request, page, size, book_name, author, publish):
         dic = {"deleted": 0}
-        book_name and dic.update(book_name=book_name)
-        author and dic.update(author=author)
-        publish and dic.update(publish=publish)
+        book_name and dic.update(book_name__icontains=book_name)
+        author and dic.update(author__icontains=author)
+        publish and dic.update(publish__icontains=publish)
         book_result = await Book.filter(**dic)
         book_result = book_result if book_result else "查询结果为空"
+        book_result = book_result[(page - 1) * size:page * size]
         return book_result
 
     async def delete_book(self, book_id):
@@ -53,6 +54,6 @@ class BookManagement(object):
         }
         try:
             await Book.filter(id=book_id).update(**update_data)
-            return "书籍修改成功过"
+            return "书籍修改成功"
         except:
             return "书籍修改失败"
