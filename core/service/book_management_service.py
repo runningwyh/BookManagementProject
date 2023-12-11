@@ -52,8 +52,12 @@ class BookManagement(object):
             "introduction": book_obj.get("introduction"),
             "publish_time": book_obj.get("publish_time")
         }
-        try:
-            await Book.filter(id=book_id).update(**update_data)
-            return "书籍修改成功"
-        except:
-            return "书籍修改失败"
+        book_data = await Book.filter(id=book_id).first()
+        if book_data:
+            try:
+                await Book.filter(id=book_id).update(**update_data)
+                return "书籍修改成功！"
+            except:
+                return "书籍修改失败！"
+        else:
+            return "书籍不存在或书籍已被删除！"
