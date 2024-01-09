@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import time
-
 from fastapi import FastAPI, Request
 # from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-
+from starlette.middleware.cors import CORSMiddleware
 from settings import system_logs, logs, connect_db
 from main.routers import include
 from passlib.context import CryptContext
@@ -41,6 +40,14 @@ class Main(object):
 
         app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "10.100.48.83", "42192.39.253"])
         [app.include_router(**router) for router in include]
+
+        # 解决跨域问题
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_credentials=False,
+            allow_methods=["*"],
+            allow_headers=["*"])
 
         @app.exception_handler(RequestValidationError)
         async def request_error(request: Request, exc):
