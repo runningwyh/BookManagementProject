@@ -21,20 +21,19 @@ class UserInfo(object):
         except Exception as e:
             return e
     #
-    # async def get_book_list(self, request, page, size, book_name, author, publish):
-    #     dic = {"deleted": 0}
-    #     book_name and dic.update(book_name__icontains=book_name)
-    #     author and dic.update(author__icontains=author)
-    #     publish and dic.update(publish__icontains=publish)
-    #     book_result = await Book.filter(**dic)
-    #     book_result = book_result if book_result else "查询结果为空"
-    #     book_result = book_result[(page - 1) * size:page * size]
-    #     return book_result
+    async def get_user_list(self, request, page, size, user_name, phone):
+        dic = {}
+        user_name and dic.update(user_name__icontains=user_name)
+        phone and dic.update(phone__icontains=phone)
+        user_result = await User.filter(**dic)
+        user_result = user_result if user_result else "查询结果为空"
+        user_result = user_result[(page - 1) * size:page * size]
+        return user_result
     #
-    # async def delete_book(self, book_id):
-    #     book = await Book.filter(id = book_id).first()
-    #     if book:
-    #         await book.delete()
+    async def delete_user(self, user_id):
+        user = await User.filter(id = user_id).first()
+        if user:
+            await user.delete()
     #
     # async def update_book(self, book_obj):
     #     book_id = book_obj.get("id")

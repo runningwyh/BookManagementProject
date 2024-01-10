@@ -29,8 +29,8 @@ class Main(object):
     def create_app(cls):
         app = FastAPI(
             debug=False,
-            title='图书管理系统',
-            description='test1',
+            title='ManagementProject',
+            description='test',
             version='v1.0.0',
             docs_url='/docs',
             redoc_url='/redocs',
@@ -38,7 +38,7 @@ class Main(object):
             on_shutdown=[cls.shutdown_event]
         )
 
-        app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "10.100.48.83", "42192.39.253"])
+        app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "10.100.48.83", "42.192.39.253"])
         [app.include_router(**router) for router in include]
 
         # 解决跨域问题

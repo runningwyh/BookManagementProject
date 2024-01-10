@@ -14,16 +14,16 @@ async def regestuser(request_data: UserRequest):
     return await UserInfo().add_user(request_data.dict())
 
 
-# @router.get(path="/book/list", summary="查询书籍")
-# async def api_get_book_list(request: Request, page: int = 1, size: int = 10, book_name: str = None,
-#                         author: str = None, publish: str = None):
-#     return await BookManagement().get_book_list(request, page, size, book_name, author, publish)
+@router.get(path="/user/list", summary="查询用户")
+async def api_get_user_list(request: Request, user_name: str = None,
+                        phone: str = None, page: int = 1, size: int = 10):
+    return await UserInfo().get_user_list(request, page, size, user_name, phone)
 #
 #
-# @router.delete(path="/book/delete/{book_id}", summary="删除书籍")
-# async def api_delete_book(request: Request, book_id):
-#     return await BookManagement().delete_book(book_id)
-#
+@router.delete(path="/user/delete/{user_id}", summary="删除用户")
+async def api_delete_user(request: Request, user_id):
+    return await UserInfo().delete_user(user_id)
+
 #
 # @router.put(path="/book/update", summary="更新书籍")
 # async def api_updata_book(request: Request, book_obj: UpdateBookRequest):
