@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
-from core.model.book_management_model import Book
+from core.model.book_management_model import Book, BookClass
 
 
 class BookManagement(object):
@@ -8,7 +8,7 @@ class BookManagement(object):
         pass
 
     async def add_book(self, body_data):
-        book_name = body_data.get("bookName")
+        # book_name = body_data.get("bookName")
         book_data = {
             "book_name": body_data.get("bookName"),
             "author": body_data.get("author"),
@@ -61,3 +61,57 @@ class BookManagement(object):
                 return "书籍修改失败！"
         else:
             return "书籍不存在或书籍已被删除！"
+
+
+class BookClassManagement(object):
+    def __init__(self):
+        pass
+
+    async def book_class_manage(self, body_data):
+        book_class_data = {
+            "name": body_data.get("classname"),
+            "description": body_data.get("description")
+        }
+        try:
+            await BookClass.create(**book_class_data)
+            return "书籍分类添加成功！"
+        except Exception as e:
+            return "书籍分类添加失败！"
+
+    async def book_class_list(self, name, page, size):
+        dic = {"deleted": 0}
+        name and dic.update(name__icontains=name)
+        class_list = await BookClass.filter(**dic)
+        class_list = class_list if class_list else "查询结果为空！"
+        class_list = class_list[(page - 1) * size:page * size]
+        return class_list
+
+    async def update_class(self, change_data):
+        id = change_data.get("id")
+        updata_data = {
+            "name": change_data.get("classname"),
+            "description": change_data.get("description")
+        }
+        book_data = await BookClass.filter(id=id).first()
+        if book_data:
+            try:
+                await BookClass.filter(id=id).update(**updata_data)
+                return "书籍分类修改成功！"
+            except:
+                return "书籍分类修改失败！"
+        else:
+            return "书籍分类不存在或书籍分类已被删除！"
+
+    async def delete_class(self, id):
+        book_class = await BookClass.filter(id=id).first()
+        if book_class:
+            try:
+                await book_class.delete()
+                return "书籍分类删除成功！"
+            except Exception as e:
+                return e
+        else:
+            return "书籍分类不存在或已被删除！"
+
+
+

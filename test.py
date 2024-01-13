@@ -6,10 +6,15 @@ class MsgData(NamedTuple):
     code: int
     message: str = "服务器异常"
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, MsgData):
+            raise NotImplemented
+        return self.code == other.code
+
 a = MsgData(500000, "未查询环境信息")
 
-# print(a.code)
-# print(a.message)
+print(MsgData(500000, "未查询环境信息"))
+print(a.message)
 
 from typing import Optional
 
@@ -23,6 +28,3 @@ def get_person(name: Optional[Person]) -> Optional[str]:
     else:
         return name.name
 
-person = Person("Alice")
-print(get_person(person))   # 输出: Alice
-print(get_person(None))     # 输出: None

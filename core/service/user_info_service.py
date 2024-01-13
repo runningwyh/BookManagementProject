@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
+import os
 from core.model.user_info_model import User
 
 
@@ -55,3 +56,21 @@ class UserInfo(object):
     #             return "书籍修改失败！"
     #     else:
     #         return "书籍不存在或书籍已被删除！"
+
+
+class Other(object):
+    def __init__(self):
+        pass
+
+    async def upload_image(self, image):
+        if not image.content_type.startswith("image/"):
+            return {"message": "只能上传图片文件"}
+            # 保存文件到指定路径
+        save_path = "\data\images"
+        file_path = os.path.join(save_path, image.filename)
+        with open(file_path, "wb") as f:
+            try:
+                f.write(await image.read())
+                return "保存成功"
+            except Exception as e:
+                return e
