@@ -31,3 +31,8 @@ async def api_delete_user(request: Request, user_id):
 @router.post(path="/upload-image", summary="上传图片")
 async def upload_images(image: UploadFile = File(...)):
     return await Other().upload_image(image)
+
+@router.get("/download/{filename}")
+async def download_image(filename: str):
+    return await Other().get_image(filename)
+

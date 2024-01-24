@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 import os
 from core.model.user_info_model import User
+from starlette.responses import FileResponse
 
 
 class UserInfo(object):
@@ -65,8 +66,8 @@ class Other(object):
     async def upload_image(self, image):
         if not image.content_type.startswith("image/"):
             return {"message": "只能上传图片文件"}
-            # 保存文件到指定路径
-        save_path = "\data\images"
+        # 保存文件到指定路径
+        save_path = "/data/images"
         file_path = os.path.join(save_path, image.filename)
         with open(file_path, "wb") as f:
             try:
@@ -74,3 +75,10 @@ class Other(object):
                 return "保存成功"
             except Exception as e:
                 return e
+
+    async def get_image(self, filename):
+        file_path = f"/data/images/{filename}"
+        try:
+            return FileResponse(file_path, media_type="image/png")
+        except Exception as e:
+            return e

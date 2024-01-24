@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 from pydantic import BaseModel
 
+
 class BookRequest(BaseModel):
     """ 创建用户接口数据校验 """
     bookName: str
