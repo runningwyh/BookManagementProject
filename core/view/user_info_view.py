@@ -32,7 +32,7 @@ async def api_delete_user(request: Request, user_id):
 async def upload_images(image: UploadFile = File(...)):
     return await Other().upload_image(image)
 
-@router.get("/download/{filename}")
+@router.get("/download/{filename}", summary="下载图片")
 async def download_image(filename: str):
     return await Other().get_image(filename)
 

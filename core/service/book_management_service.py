@@ -114,4 +114,28 @@ class BookClassManagement(object):
             return "书籍分类不存在或已被删除！"
 
 
+class BookBorrowManagement(object):
+    def __init__(self):
+        pass
+
+    async def borrow_book(self, id, name, name_class, return_time):
+        borrow_data = {
+            "id": id,
+            "name": name,
+            "name_class": name_class,
+            "expected_back_time": return_time   # 计划还书时间
+        }
+        bookinfo = await Book.filter(id = id).first().values()
+        if bookinfo.get("stock"):
+            stock = bookinfo.get("stock") - 1
+            await Book.filter(id=id).update(stock=stock)
+            return "借书成功！"
+        else:
+            return "库存不足，请联系图书管理员！"
+
+    async def return_book(self, id):
+        pass
+
+
+
 

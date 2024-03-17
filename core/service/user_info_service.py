@@ -4,6 +4,8 @@ import os
 from core.model.user_info_model import User
 from starlette.responses import FileResponse
 
+from utils.handle_yaml import Handleyaml
+
 
 class UserInfo(object):
     def __init__(self):
@@ -61,7 +63,7 @@ class UserInfo(object):
 
 class Other(object):
     def __init__(self):
-        pass
+        self.do_yaml = Handleyaml('config.yaml')
 
     async def upload_image(self, image):
         if not image.content_type.startswith("image/"):
@@ -77,7 +79,8 @@ class Other(object):
                 return e
 
     async def get_image(self, filename):
-        file_path = f"/data/images/{filename}"
+        file_path =self.do_yaml.read_yaml('path', 'images_file')
+        file_path = f"{file_path}/{filename}"
         try:
             return FileResponse(file_path, media_type="image/png")
         except Exception as e:

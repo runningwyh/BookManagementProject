@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from fastapi import APIRouter, Request
-from core.service.book_management_service import BookManagement, BookClassManagement
+from core.service.book_management_service import BookManagement, BookClassManagement, BookBorrowManagement
 from core.schema.book_management_schema import BookRequest, UpdateBookRequest, BookClassRequest, UpdataClassRequest
 
 
@@ -43,5 +43,9 @@ async def update_class_name(request: Request, change_info: UpdataClassRequest):
 async def delete_book_class(request: Request, id):
     return await BookClassManagement().delete_class(id)
 
+#
+@router.post(path="/book/borrow", summary="借阅图书")
+async def get_book_borrow(request: Request, id: int, name: str=None, name_class: str=None, return_time: str=None):
+    return await BookBorrowManagement().borrow_book(id, name, name_class, return_time)
 
-# 借阅管理
+

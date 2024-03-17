@@ -1,0 +1,26 @@
+# =========== 数据库配置 =================
+MySQL:
+  SERVER: '42.192.39.253'
+  USER: 'root'
+  PASSWORD: '123456'
+  PORT: '3306'
+
+Elasticsearch:
+  SERVER: '10.100.48.83'
+  PORT: '9200'
+
+Redis:
+  HOST: '127.0.0.1'
+  PORT: '6379'
+  PASSWORD: '123456'
+
+MongoDB:
+  SERVER: '127.0.0.1'
+  PORT: '27017'
+
+# 配置项目的文档路径
+path:
+  BASEPATH: '/data/filebrowser/sites/root/'  # 生产
+  # 图片上传目录
+   images_file: "/data/images"
+#  images_file: "D:\\Documents\\Desktop\\map"
